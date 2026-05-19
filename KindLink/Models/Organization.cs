@@ -1,0 +1,15 @@
+namespace KindLink.Models;
+
+public class Organization
+{
+    public int OrganizationId { get; set; } // Primary Key
+    //Atributes
+    
+    public string Name { get; set; }
+
+    public string Email { get; set; }
+
+    public string PhoneNumber { get; set; }
+
+    public string Address { get; set; }
+}
