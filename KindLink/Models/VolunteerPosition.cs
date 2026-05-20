@@ -14,4 +14,6 @@ public class VolunteerPosition
     public string Location { get; set; }
     
     public int OrganizationId { get; set; } // Foreign Key
+    public Organization? Organization { get; set; }
+
 }
