@@ -1,6 +1,7 @@
 using KindLink.Data;
 using KindLink.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KindLink.Controllers;
 
@@ -26,6 +27,9 @@ public class VolunteerPositionsController : Controller
     // Create
     public IActionResult Create()
     {
+        //Dropdown of Organizations
+        ViewBag.OrganizationId = new SelectList(_context.Organization.OrderBy(c => c.Name).ToList(), "OrganizationId", "Name");
+        
         return View();
     }
     
