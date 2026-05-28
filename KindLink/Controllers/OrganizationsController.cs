@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KindLink.Controllers;
 
-public class OrganizationController : Controller
+public class OrganizationsController : Controller
 {
     
     // DB connection
     private readonly ApplicationDbContext _context;
 
     // Constructor with database context
-    public OrganizationController(ApplicationDbContext context)
+    public OrganizationsController(ApplicationDbContext context)
     {
         _context = context;
     }
