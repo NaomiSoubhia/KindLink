@@ -47,10 +47,57 @@ public class OrganizationController : Controller
         return RedirectToAction("Index");
     }
     
-    // Edit
-    public IActionResult Edit()
+    // GET
+    public IActionResult Edit(int id)
     {
-        return View();
+        // fetch category by id
+        var organization = _context.Organization.Find(id);
+
+        if (organization == null)
+        {
+            return NotFound();
+        }
+
+        // Send all the infos to the view
+        return View(organization);
     }
-    
+
+    // POST
+    [HttpPost]
+    public IActionResult Edit([Bind("OrganizationId,Name,Email,PhoneNumber,Address")] Organization organization)
+    {
+        // Validate
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+
+        // Update in the database
+        _context.Organization.Update(organization);
+        _context.SaveChanges();
+
+        // Return to Index
+        return RedirectToAction("Index");
+    }
+
+    // GET
+    public IActionResult Delete(int id)
+    {
+        // Search for the organozation ID
+        var organization = _context.Organization.Find(id);
+
+        if (organization == null)
+        {
+            // Not Found
+            return NotFound();
+        }
+
+        // Delete
+        _context.Organization.Remove(organization);
+        //Save
+        _context.SaveChanges();
+
+        // Back to index
+        return RedirectToAction("Index");
+    }
 }
