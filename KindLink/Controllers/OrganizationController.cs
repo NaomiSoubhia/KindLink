@@ -19,7 +19,7 @@ public class OrganizationController : Controller
     // GET
     public IActionResult Index()
     {
-        var organizations = new List<Organization>();
+        var organizations = _context.Organizations.ToList();
         return View(organizations);
     }
     // Create
