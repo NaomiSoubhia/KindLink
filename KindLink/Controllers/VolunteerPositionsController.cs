@@ -52,11 +52,37 @@ public class VolunteerPositionsController : Controller
         // Index
         return RedirectToAction("Index");
     }
-    
-    // Edit
-    public IActionResult Edit()
+    // GET edit
+    public IActionResult Edit(int id)
     {
-        return View();
+        // fetch category by id
+        var volunteerPosition = _context.VolunteerPosition.Find(id);
+
+        if (volunteerPosition == null)
+        {
+            return NotFound();
+        }
+
+        // Send all the infos to the view
+        return View(volunteerPosition);
+    }
+
+    // POST
+    [HttpPost]
+    public IActionResult Edit([Bind("VolunteerPositionId,Title, Description, EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition)
+    {
+        // Validate
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+
+        // Update in the database
+        _context.VolunteerPosition.Update(volunteerPosition);
+        _context.SaveChanges();
+
+        // Return to Index
+        return RedirectToAction("Index");
     }
     
 }
