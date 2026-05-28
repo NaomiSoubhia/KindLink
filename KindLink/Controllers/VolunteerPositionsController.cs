@@ -33,6 +33,26 @@ public class VolunteerPositionsController : Controller
         return View();
     }
     
+    //Post: Create
+    [HttpPost]
+    public IActionResult Create([Bind("Title, Description, EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition)
+    {
+            
+        // validate
+        if (!ModelState.IsValid)
+        {
+            return View(volunteerPosition);
+        }
+
+        // Create
+        _context.VolunteerPosition.Add(volunteerPosition);
+        // Save in the database
+        _context.SaveChanges();
+
+        // Index
+        return RedirectToAction("Index");
+    }
+    
     // Edit
     public IActionResult Edit()
     {
