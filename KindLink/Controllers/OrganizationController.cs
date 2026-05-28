@@ -1,3 +1,4 @@
+using KindLink.Data;
 using KindLink.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -5,6 +6,16 @@ namespace KindLink.Controllers;
 
 public class OrganizationController : Controller
 {
+    
+    // DB connection
+    private readonly ApplicationDbContext _context;
+
+    // Constructor with database context
+    public OrganizationController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+    
     // GET
     public IActionResult Index()
     {
