@@ -9,4 +9,7 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options)
     {
     }
+    public DbSet<KindLink.Models.Organization> Category { get; set; } = default!;
+    public DbSet<KindLink.Models.VolunteerPosition> Product { get; set; } = default!;
+ 
 }
