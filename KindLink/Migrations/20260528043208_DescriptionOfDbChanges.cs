@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace KindLink.Migrations
 {
     /// <inheritdoc />
-    public partial class DescriptionOfDbChangesHere : Migration
+    public partial class DescriptionOfDbChanges : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,7 +51,7 @@ namespace KindLink.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Organization",
                 columns: table => new
                 {
                     OrganizationId = table.Column<int>(type: "int", nullable: false)
@@ -63,7 +63,7 @@ namespace KindLink.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.OrganizationId);
+                    table.PrimaryKey("PK_Organization", x => x.OrganizationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,7 +173,7 @@ namespace KindLink.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "VolunteerPosition",
                 columns: table => new
                 {
                     VolunteerPositionId = table.Column<int>(type: "int", nullable: false)
@@ -186,11 +186,11 @@ namespace KindLink.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.VolunteerPositionId);
+                    table.PrimaryKey("PK_VolunteerPosition", x => x.VolunteerPositionId);
                     table.ForeignKey(
-                        name: "FK_Product_Category_OrganizationId",
+                        name: "FK_VolunteerPosition_Organization_OrganizationId",
                         column: x => x.OrganizationId,
-                        principalTable: "Category",
+                        principalTable: "Organization",
                         principalColumn: "OrganizationId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -235,8 +235,8 @@ namespace KindLink.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_OrganizationId",
-                table: "Product",
+                name: "IX_VolunteerPosition_OrganizationId",
+                table: "VolunteerPosition",
                 column: "OrganizationId");
         }
 
@@ -259,7 +259,7 @@ namespace KindLink.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "VolunteerPosition");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -268,7 +268,7 @@ namespace KindLink.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Organization");
         }
     }
 }

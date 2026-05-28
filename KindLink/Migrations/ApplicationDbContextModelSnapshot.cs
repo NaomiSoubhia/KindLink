@@ -48,7 +48,7 @@ namespace KindLink.Migrations
 
                     b.HasKey("OrganizationId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Organization");
                 });
 
             modelBuilder.Entity("KindLink.Models.VolunteerPosition", b =>
@@ -81,7 +81,7 @@ namespace KindLink.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("Product");
+                    b.ToTable("VolunteerPosition");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
