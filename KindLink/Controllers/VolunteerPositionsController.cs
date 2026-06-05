@@ -55,15 +55,19 @@ public class VolunteerPositionsController : Controller
     // GET edit
     public IActionResult Edit(int id)
     {
-        // fetch category by id
+        // find volunteer by id
         var volunteerPosition = _context.VolunteerPosition.Find(id);
 
+        // return NotFound() if not found volunteerPosition
         if (volunteerPosition == null)
         {
             return NotFound();
         }
 
-        // Send all the infos to the view
+        // Dropdown
+        ViewBag.OrganizationId = new SelectList(_context.Organization.OrderBy(c => c.Name).ToList(), "OrganizationId", "Name");
+
+        // pass product data to view for display
         return View(volunteerPosition);
     }
 
@@ -82,6 +86,26 @@ public class VolunteerPositionsController : Controller
         _context.SaveChanges();
 
         // Return to Index
+        return RedirectToAction("Index");
+    }
+    
+    // GET: Delete
+    public IActionResult Delete(int id)
+    {
+        // Find Volunteer Position by id
+        var volunteerPosition = _context.VolunteerPosition.Find(id);
+
+        //  Return NotFound() if not found volunteerPosition
+        if (volunteerPosition == null)
+        {
+            return NotFound();
+        }
+
+        // Remove from database and save
+        _context.VolunteerPosition.Remove(volunteerPosition);
+        _context.SaveChanges();
+
+        // Refresh page
         return RedirectToAction("Index");
     }
     

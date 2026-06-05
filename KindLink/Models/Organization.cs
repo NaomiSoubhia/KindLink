@@ -13,6 +13,8 @@ public class Organization
 
     public string Address { get; set; }
     
+    public string? Image { get; set; }
+    
     // Child reference to VolunteerPosition: one organization can have many volunteer positions
     public List<VolunteerPosition>? VolunteerPosition { get; set; }
 
