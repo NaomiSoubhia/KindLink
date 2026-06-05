@@ -29,7 +29,7 @@ public class OrganizationsController : Controller
     }
     
     [HttpPost]
-    public IActionResult Create([Bind("Name,Email,PhoneNumber,Address")] Organization organization)
+    public IActionResult Create([Bind("Name,Email,PhoneNumber,Address,Image")] Organization organization)
     {
         // Validating the inputs
         if (!ModelState.IsValid)
@@ -64,7 +64,7 @@ public class OrganizationsController : Controller
 
     // POST
     [HttpPost]
-    public IActionResult Edit([Bind("OrganizationId,Name,Email,PhoneNumber,Address")] Organization organization)
+    public IActionResult Edit([Bind("OrganizationId,Name,Email,PhoneNumber,Address, Image")] Organization organization)
     {
         // Validate
         if (!ModelState.IsValid)
@@ -90,6 +90,12 @@ public class OrganizationsController : Controller
         {
             // Not Found
             return NotFound();
+        }
+        
+        // Check if childs
+        if (organization.VolunteerPosition == null)
+        {
+            return View("Error");
         }
 
         // Delete
