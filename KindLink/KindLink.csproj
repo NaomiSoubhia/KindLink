@@ -20,9 +20,6 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.15"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages\" />
-      <Folder Include="wwwroot\img\" />
-    </ItemGroup>
+
   
 </Project>
