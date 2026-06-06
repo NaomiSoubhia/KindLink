@@ -1,10 +1,10 @@
 @model IEnumerable<KindLink.Models.VolunteerPosition>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Volunteer Positions";
 }
 
-<h1>Index</h1>
+<h1>Volunteer Positions</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -26,9 +26,11 @@
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.Organization.OrganizationId)
+            @Html.DisplayNameFor(model => model.Organization.Name)
         </th>
-        <th></th>
+        <th>  
+            @Html.DisplayNameFor(model => model.Image)
+            </th>
     </tr>
     </thead>
     <tbody>
@@ -47,13 +49,19 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Organization.OrganizationId)
+                @Html.DisplayFor(modelItem => item.Organization.Name)
+            </td>
+            
+            <td>
+                @if (item.Image != null)
+                {
+                    <img src="~/img/@item.Image" alt="Product Image" class="thumb" />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.VolunteerPositionId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.VolunteerPositionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VolunteerPositionId">Delete</a>
-            </td>
+                <a asp-action="Delete" asp-route-id="@item.OrganizationId" onclick="return confirmDelete();">Delete</a>            </td>
         </tr>
     }
     </tbody>

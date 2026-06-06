@@ -2,8 +2,20 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to KindLink!</h1>
-    <p>Connects volunteers with organizations offering volunteer opportunities</p>
-    <img src="images/volunteer.jpg" class="rounded mx-auto d-block img-thumbnail w-50" >
+<div class="hero">
+    <div class="hero-content text-center">
+        <h1 class="display-2 fw-bold">Welcome to KindLink</h1>
+        <p class="lead">
+            Connecting volunteers with meaningful opportunities in their communities.
+        </p>
+
+        <a asp-controller="VolunteerPositions" asp-action="Index" class="btn btn-lg button me-2">
+            Find Opportunities
+        </a>
+
+        <a asp-controller="Organizations" asp-action="Index" class="btn btn-lg btn-outline-light">
+            Browse Organizations
+        </a>
+    </div>
 </div>
+

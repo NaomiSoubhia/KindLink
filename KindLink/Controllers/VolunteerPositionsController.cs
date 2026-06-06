@@ -2,6 +2,7 @@ using KindLink.Data;
 using KindLink.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace KindLink.Controllers;
 
@@ -20,8 +21,11 @@ public class VolunteerPositionsController : Controller
     
     // GET
     public IActionResult Index()
-    {
-        var volunteerPositions =_context.VolunteerPosition.ToList();
+    {            var volunteerPositions = _context.VolunteerPosition
+            .Include(p => p.Organization)
+            .OrderBy(p => p.Title)
+            .ToList();
+        
         return View(volunteerPositions);
     }
     // Create
@@ -73,19 +77,32 @@ public class VolunteerPositionsController : Controller
 
     // POST
     [HttpPost]
-    public IActionResult Edit([Bind("VolunteerPositionId,Title, Description, EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition)
+    public IActionResult Edit([Bind("VolunteerPositionId,Title, Description, EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition, IFormFile? Image, string? CurrentImage)
     {
-        // Validate
+        // input validation
         if (!ModelState.IsValid)
         {
-            return View();
+            // Reload if invalid
+            return View(volunteerPosition);
         }
 
-        // Update in the database
+        // Check if image is not null and then upload image
+        if (Image != null)
+        {
+            var fileName = UploadImage(Image);
+            volunteerPosition.Image = fileName; 
+        }
+        else
+        {
+            //Keep the actual image
+            volunteerPosition.Image = CurrentImage;  
+        }
+
+        // If image is valid, we save in the database
         _context.VolunteerPosition.Update(volunteerPosition);
         _context.SaveChanges();
 
-        // Return to Index
+        // Refresh
         return RedirectToAction("Index");
     }
     
@@ -107,6 +124,29 @@ public class VolunteerPositionsController : Controller
 
         // Refresh page
         return RedirectToAction("Index");
+    }
+    
+    //Image Upload
+    private static string UploadImage(IFormFile Image)
+    {
+        // get temp location of uploaded image
+        var filePath = Path.GetTempFileName();
+
+        // create unique name to prevent overwriting using Globally Unique Identifier (GUID)
+        // e.g. product.jpg => 29387rjlf398dsjf-product.jpg
+        var fileName = Guid.NewGuid().ToString() + "-" + Image.FileName;
+
+        // set destination path dynamically so it works locally and in production
+        var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\" + fileName; 
+
+        // use filestream to copy image from temp folder to img folder
+        using (var stream = new FileStream(uploadPath, FileMode.Create))
+        {
+            Image.CopyTo(stream);
+        }
+
+        // return new unique file name for saving to db
+        return fileName;
     }
     
 }
