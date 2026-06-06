@@ -8,3 +8,8 @@ I used Rider as my IDE and coded using C# with the ASP.NET MVC pattern.
 - Organization
 - VolunteerPosition
 - Volunteer
+
+### Design & Branding
+# Color Palette
+<img width="1720" height="834" alt="image" src="https://github.com/user-attachments/assets/2d6a012d-21e9-4fd3-baa0-d9d3dcccc2e0" />
+<li>https://color.adobe.com/explore</li>
