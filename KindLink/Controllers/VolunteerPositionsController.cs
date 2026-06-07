@@ -59,7 +59,11 @@ public class VolunteerPositionsController : Controller
         else
         {
             //Error
+           // Reference: https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelstatedictionary.addmodelerror?view=aspnetcore-10.0
             ModelState.AddModelError("Image", "Please upload an image.");
+            //Dropdown of Organizations
+            ViewBag.OrganizationId = new SelectList(_context.Organization.OrderBy(c => c.Name).ToList(), "OrganizationId", "Name");
+
             return View(volunteerPosition); 
         }
         
