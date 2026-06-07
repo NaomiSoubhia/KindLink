@@ -39,14 +39,30 @@ public class VolunteerPositionsController : Controller
     
     //Post: Create
     [HttpPost]
-    public IActionResult Create([Bind("Title, Description, EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition)
+    public IActionResult Create([Bind("Title,Description,EventDate,Location,OrganizationId")]
+        VolunteerPosition volunteerPosition,
+        IFormFile? Image)
     {
-            
-        // validate
+        // input validation
         if (!ModelState.IsValid)
         {
+            // Reload if invalid
             return View(volunteerPosition);
         }
+
+        // Check if image is not null and then upload image
+        if (Image != null)
+        {
+            var fileName = UploadImage(Image);
+            volunteerPosition.Image = fileName; 
+        }
+        else
+        {
+            //Error
+            ModelState.AddModelError("Image", "Please upload an image.");
+            return View(volunteerPosition); 
+        }
+        
 
         // Create
         _context.VolunteerPosition.Add(volunteerPosition);
@@ -56,6 +72,8 @@ public class VolunteerPositionsController : Controller
         // Index
         return RedirectToAction("Index");
     }
+    
+    
     // GET edit
     public IActionResult Edit(int id)
     {
