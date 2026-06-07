@@ -20,6 +20,14 @@ I used Rider as my IDE and coded using C# with the ASP.NET MVC pattern.
 </style>
 ``
 
+### Logo 
+Created on Canva: https://canva.link/vazey1qu3lsvyoo
+
+<img width="440" height="372" alt="image" src="https://github.com/user-attachments/assets/9127b003-5110-4955-b426-759a20ef5395" />
+
+
+
+
 ## MVC C#
 
 ### ModelState.AddModelError (manual / custom validation)
