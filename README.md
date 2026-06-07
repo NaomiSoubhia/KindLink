@@ -26,3 +26,6 @@ I used Rider as my IDE and coded using C# with the ASP.NET MVC pattern.
 We use this when the validation rule is not simple or depends on custom logic. In this case, I am using it to validate the uploaded image.
 
 Reference: https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelstatedictionary.addmodelerror?view=aspnetcore-10.0 
+
+## Link to the somee website
+http://techjockeysnaomi.somee.com/
