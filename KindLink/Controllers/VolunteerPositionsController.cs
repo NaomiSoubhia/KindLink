@@ -137,7 +137,7 @@ public class VolunteerPositionsController : Controller
         var fileName = Guid.NewGuid().ToString() + "-" + Image.FileName;
 
         // set destination path dynamically so it works locally and in production
-        var uploadPath = System.IO.Directory.GetCurrentDirectory() + "//wwwroot//img//" + fileName; 
+        var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\" + fileName; 
 
         // use filestream to copy image from temp folder to img folder
         using (var stream = new FileStream(uploadPath, FileMode.Create))
