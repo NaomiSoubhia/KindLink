@@ -147,6 +147,8 @@ public class VolunteerPositionsController : Controller
     //Image Upload
     private static string UploadImage(IFormFile Image)
     {
+        
+        
         // get temp location of uploaded image
         var filePath = Path.GetTempFileName();
 
