@@ -1,5 +1,6 @@
 using KindLink.Data;
 using KindLink.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ public class VolunteerPositionsController : Controller
         return View(volunteerPositions);
     }
     // Create
+    [Authorize] // just logged users can access
     public IActionResult Create()
     {
         //Dropdown of Organizations
@@ -38,7 +40,8 @@ public class VolunteerPositionsController : Controller
     }
     
     //Post: Create
-    [HttpPost]
+    [Authorize] // just logged users can access
+    [HttpPost] 
     public IActionResult Create([Bind("Title,Description,EventDate,Location,OrganizationId")]
         VolunteerPosition volunteerPosition,
         IFormFile? Image)
@@ -79,6 +82,7 @@ public class VolunteerPositionsController : Controller
     
     
     // GET edit
+    [Authorize] // just logged users can access
     public IActionResult Edit(int id)
     {
         // find volunteer by id
@@ -98,6 +102,7 @@ public class VolunteerPositionsController : Controller
     }
 
     // POST
+    [Authorize] // just logged users can access
     [HttpPost]
     public IActionResult Edit([Bind("VolunteerPositionId,Title, Description, EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition, IFormFile? Image, string? CurrentImage)
     {
@@ -129,6 +134,7 @@ public class VolunteerPositionsController : Controller
     }
     
     // GET: Delete
+    [Authorize] // just logged users can access
     public IActionResult Delete(int id)
     {
         // Find Volunteer Position by id
@@ -149,6 +155,7 @@ public class VolunteerPositionsController : Controller
     }
     
     //Image Upload
+    [Authorize] // just logged users can access
     private static string UploadImage(IFormFile Image)
     {
         

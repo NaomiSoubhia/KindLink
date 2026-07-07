@@ -6,9 +6,12 @@
 
 <h1 class="text-center my-5">Organizations</h1>
 
-<p>
-    <a asp-action="Create" class="mb-3 ms-2 btn btn-primary">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create" class="mb-3 ms-2 btn btn-primary">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
     <tr>
@@ -42,11 +45,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrganizationId">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrganizationId">Delete</a>
-            </td>
-        </tr>
+            
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OrganizationId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.OrganizationId">Delete</a>
+                </td>
+            }
+    </tr>
     }
     </tbody>
 </table>

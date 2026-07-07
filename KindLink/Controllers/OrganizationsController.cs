@@ -1,9 +1,9 @@
 using KindLink.Data;
 using KindLink.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KindLink.Controllers;
-
 public class OrganizationsController : Controller
 {
     
@@ -23,11 +23,13 @@ public class OrganizationsController : Controller
         return View(organizations);
     }
     // Create
+    [Authorize] // just logged users can access it
     public IActionResult Create()
     {
         return View();
     }
     
+    [Authorize] // just logged users can access it
     [HttpPost]
     public IActionResult Create([Bind("Name,Email,PhoneNumber,Address,Image")] Organization organization)
     {
@@ -48,6 +50,7 @@ public class OrganizationsController : Controller
     }
     
     // GET
+    [Authorize] // just logged users can access
     public IActionResult Edit(int id)
     {
         // fetch category by id
@@ -63,6 +66,7 @@ public class OrganizationsController : Controller
     }
 
     // POST
+    [Authorize] // just logged users can access
     [HttpPost]
     public IActionResult Edit([Bind("OrganizationId,Name,Email,PhoneNumber,Address, Image")] Organization organization)
     {
@@ -81,6 +85,7 @@ public class OrganizationsController : Controller
     }
 
     // GET
+    [Authorize] // just logged users can access
     public IActionResult Delete(int id)
     {
         // Search for the organozation ID

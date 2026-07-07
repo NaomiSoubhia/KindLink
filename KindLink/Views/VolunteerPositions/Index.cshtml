@@ -6,9 +6,12 @@
 
 <h1 class="text-center my-5">Volunteer Positions</h1>
 
-<p>
-    <a class="mb-3 ms-2 btn btn-primary" asp-action="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a class="mb-3 ms-2 btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
     <tr>
@@ -60,11 +63,16 @@
                     <img src="/img/@item.Image" alt="Product Image" style="width:120px; height:120px; object-fit:cover;" class="thumb" />
                 }
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VolunteerPositionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VolunteerPositionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VolunteerPositionId" onclick="return confirmDelete();">Delete</a>            </td>
-        </tr>
+            
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.VolunteerPositionId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.VolunteerPositionId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.VolunteerPositionId" onclick="return confirmDelete();">Delete</a>
+                </td>
+            }
+    </tr>
     }
     </tbody>
 </table>
