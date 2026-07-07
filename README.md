@@ -36,4 +36,8 @@ We use this when the validation rule is not simple or depends on custom logic. I
 Reference: https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelstatedictionary.addmodelerror?view=aspnetcore-10.0 
 
 ## Link to the somee website
-http://techjockeysnaomi.somee.com/
+http://kindlink.somee.com/
+
+## Google Authentication
+Google OAuth authentication was implemented using ASP.NET Core Identity and Google external login provider.
+
