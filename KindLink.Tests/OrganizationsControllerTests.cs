@@ -72,5 +72,21 @@ namespace KindLink.Tests
                 result,
                 typeof(ViewResult));
         }
+        
+        [TestMethod]
+        public void Edit_Get_InvalidId_ReturnsNotFound()
+        {
+            var context = GetDatabaseContext();
+
+            var controller =
+                new OrganizationsController(context);
+
+            var result = controller.Edit(99);
+
+            Assert.IsInstanceOfType(
+                result,
+                typeof(NotFoundResult));
+        }
+
     }
 }
