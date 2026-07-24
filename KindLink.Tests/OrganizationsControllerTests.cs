@@ -105,5 +105,26 @@ namespace KindLink.Tests
                 result,
                 typeof(RedirectToActionResult));
         }
+        [TestMethod]
+        public void Edit_Post_ValidModel_RedirectsToIndex()
+        {
+            var context = GetDatabaseContext();
+
+            var controller =
+                new OrganizationsController(context);
+
+            var organization =
+                context.Organization.First();
+
+            var result =
+                controller.Edit(organization);
+
+            var redirect =
+                result as RedirectToActionResult;
+
+            Assert.AreEqual(
+                "Index",
+                redirect.ActionName);
+        }
     }
 }
