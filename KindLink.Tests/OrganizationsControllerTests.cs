@@ -55,6 +55,22 @@ namespace KindLink.Tests
 
             return context;
         }
+        [TestMethod]
+        public void Edit_Get_ValidId_ReturnsViewResult()
+        {
+            // Arrange
+            var context = GetDatabaseContext();
 
+            var controller =
+                new OrganizationsController(context);
+
+            // Act
+            var result = controller.Edit(1);
+
+            // Assert
+            Assert.IsInstanceOfType(
+                result,
+                typeof(ViewResult));
+        }
     }
 }
