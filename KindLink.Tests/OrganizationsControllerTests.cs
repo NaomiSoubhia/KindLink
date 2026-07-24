@@ -87,6 +87,23 @@ namespace KindLink.Tests
                 result,
                 typeof(NotFoundResult));
         }
+        [TestMethod]
+        public void Edit_Post_ValidModel_ReturnsRedirect()
+        {
+            var context = GetDatabaseContext();
 
+            var controller =
+                new OrganizationsController(context);
+
+            var organization =
+                context.Organization.First();
+
+            var result =
+                controller.Edit(organization);
+
+            Assert.IsInstanceOfType(
+                result,
+                typeof(RedirectToActionResult));
+        }
     }
 }
