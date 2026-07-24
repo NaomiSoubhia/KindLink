@@ -126,5 +126,27 @@ namespace KindLink.Tests
                 "Index",
                 redirect.ActionName);
         }
+        [TestMethod]
+        public void Edit_Post_UpdatesDatabase()
+        {
+            var context = GetDatabaseContext();
+
+            var controller =
+                new OrganizationsController(context);
+
+            var organization =
+                context.Organization.Find(1);
+
+            organization.Name = "Updated Name";
+
+            controller.Edit(organization);
+
+            var updated =
+                context.Organization.Find(1);
+
+            Assert.AreEqual(
+                "Updated Name",
+                updated.Name);
+        }
     }
 }
