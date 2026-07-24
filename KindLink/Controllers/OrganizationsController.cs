@@ -26,7 +26,7 @@ public class OrganizationsController : Controller
     [Authorize] // just logged users can access it
     public IActionResult Create()
     {
-        return View();
+        return View("Create");
     }
     
     [Authorize] // just logged users can access it
@@ -37,7 +37,7 @@ public class OrganizationsController : Controller
         if (!ModelState.IsValid)
         {
             //Refresh
-            return View();
+            return View("Create");
         }
 
         // Creating the new organization
@@ -62,18 +62,18 @@ public class OrganizationsController : Controller
         }
 
         // Send all the infos to the view
-        return View(organization);
+        return View("Edit", organization);    
     }
 
     // POST
     [Authorize] // just logged users can access
     [HttpPost]
-    public IActionResult Edit([Bind("OrganizationId,Name,Email,PhoneNumber,Address, Image")] Organization organization)
+    public IActionResult Edit([Bind("OrganizationId,Name,Email,PhoneNumber,Address,Image")] Organization organization)
     {
         // Validate
         if (!ModelState.IsValid)
         {
-            return View();
+            return View("Edit", organization);
         }
 
         // Update in the database

@@ -36,7 +36,7 @@ public class VolunteerPositionsController : Controller
         //Dropdown of Organizations
         ViewBag.OrganizationId = new SelectList(_context.Organization.OrderBy(c => c.Name).ToList(), "OrganizationId", "Name");
         
-        return View();
+        return View("Create");
     }
     
     //Post: Create
@@ -49,8 +49,14 @@ public class VolunteerPositionsController : Controller
         // input validation
         if (!ModelState.IsValid)
         {
-            // Reload if invalid
-            return View(volunteerPosition);
+            
+            //Refresh the create organization and send the dropdown again
+            ViewBag.OrganizationId = new SelectList(
+                _context.Organization.OrderBy(c => c.Name).ToList(),
+                "OrganizationId",
+                "Name");
+
+            return View("Create", volunteerPosition);
         }
 
         // Check if image is not null and then upload image
@@ -67,7 +73,7 @@ public class VolunteerPositionsController : Controller
             //Dropdown of Organizations
             ViewBag.OrganizationId = new SelectList(_context.Organization.OrderBy(c => c.Name).ToList(), "OrganizationId", "Name");
 
-            return View(volunteerPosition); 
+            return View("Create", volunteerPosition);
         }
         
 
@@ -98,19 +104,23 @@ public class VolunteerPositionsController : Controller
         ViewBag.OrganizationId = new SelectList(_context.Organization.OrderBy(c => c.Name).ToList(), "OrganizationId", "Name");
 
         // pass product data to view for display
-        return View(volunteerPosition);
+        return View("Edit", volunteerPosition);
     }
 
     // POST
     [Authorize] // just logged users can access
     [HttpPost]
-    public IActionResult Edit([Bind("VolunteerPositionId,Title, Description, EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition, IFormFile? Image, string? CurrentImage)
+    public IActionResult Edit([Bind("VolunteerPositionId,Title,Description,EventDate,Location,OrganizationId")] VolunteerPosition volunteerPosition, IFormFile? Image, string? CurrentImage)
     {
         // input validation
         if (!ModelState.IsValid)
         {
-            // Reload if invalid
-            return View(volunteerPosition);
+            ViewBag.OrganizationId = new SelectList(
+                _context.Organization.OrderBy(c => c.Name).ToList(),
+                "OrganizationId",
+                "Name");
+
+            return View("Edit", volunteerPosition);
         }
 
         // Check if image is not null and then upload image
