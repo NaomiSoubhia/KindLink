@@ -148,5 +148,24 @@ namespace KindLink.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+        
+        [TestMethod]
+        public void Edit_Post_InvalidModel_DoesNotUpdateDatabase()
+        {
+            // Arrange
+            var context = GetDatabaseContext();
+            var controller = new OrganizationsController(context);
+    
+            controller.ModelState.AddModelError("Name", "Required");
+            var organization = context.Organization.Find(1);
+            organization.Name = "Changed";
+
+            // Act
+            controller.Edit(organization);
+
+            // Assert
+            var original = context.Organization.Find(1);
+            Assert.AreEqual("Changed", original.Name);
+        }
     }
 }
